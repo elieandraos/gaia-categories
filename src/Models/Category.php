@@ -15,6 +15,15 @@ class Category extends Node implements TranslatableContract {
 	protected $translator = 'App\Models\CategoryTranslation';
 
 
+	/**********************
+	 * ELOQUANT RELATIONS *
+	 **********************/
+	public function news()
+	{
+		return $this->hasMany('App\Models\News');
+	}
+
+
 	/***************
 	 * NESTED SETS *
 	 ***************/
