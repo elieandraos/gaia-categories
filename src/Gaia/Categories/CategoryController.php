@@ -11,15 +11,19 @@ use Redirect;
 use Auth;
 use App;
 use Input;
+use Flash;
 
 
 class CategoryController extends Controller {
 
 	
 	public function __construct(CategoryRepositoryInterface $categoryRepositoryInterface)
-	{
+	{	
 		$this->categoryRepos = $categoryRepositoryInterface;
 		$this->authUser = Auth::user();
+
+		if(!$this->authUser->can('manage-categories') && !$this->authUser->is('superadmin'))
+			App::abort(403, 'Access denied');
 
 		//localization
 		$this->locales = Locale::where('language', '!=', 'en')->lists('language', 'language');
@@ -91,6 +95,7 @@ class CategoryController extends Controller {
 	{
 		$input = Input::all();
 		$category->update($input);
+		Flash::success('Category was updated successfully.');
 		return Redirect::route('admin.categories.list');
 	}
 
@@ -113,8 +118,6 @@ class CategoryController extends Controller {
 	 */
 	public function translate(Category $category, $locale)
 	{
-		if(!$this->authUser->can('translate-category') && !$this->authUser->is('superadmin'))
-			App::abort(403, 'Access denied');
 
 		App::setLocale($locale);
 		
@@ -129,15 +132,12 @@ class CategoryController extends Controller {
 	 * @return type
 	 */
 	public function translateStore(Category $category, $locale)
-	{
-		if(!$this->authUser->can('translate-news') && !$this->authUser->is('superadmin'))
-			App::abort(403, 'Access denied');
-		
+	{	
 		App::setLocale($locale);
 		$input = Input::all();
 		$category->update($input);
 		App::setLocale("en");
-		
+		Flash::success('Category was translated successfully.');
 		return Redirect::route('admin.categories.list');
 	}
 
