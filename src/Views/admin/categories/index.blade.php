@@ -43,6 +43,19 @@
 				{!! Form::close() !!}
 			</div>
 		</div>
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Post Types</h3>
+			</div>
+			<div class="panel-body">
+				<p>Set the root category for each post type created,<br/> in order to be populated in their backend form.</p>
+				<a href="/admin/categories/roots-post-types" style="text-decoration:underline">Update Post Types Root Categories</a>
+			</div>
+		</div>
+
+
 	</div>
 </div>
 

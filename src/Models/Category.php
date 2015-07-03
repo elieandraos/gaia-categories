@@ -14,6 +14,15 @@ class Category extends Node implements TranslatableContract {
 	protected $translatedAttributes = ['title'];
 	protected $translator = 'App\Models\CategoryTranslation';
 
+	/************************************
+	 * TITLE MUTATOR used for ->lists() *
+	 ************************************/
+	protected $appends = ['title'];
+
+	public function getTitleAttribute()
+	{
+	   return $this->title;
+	}
 
 	/**********************
 	 * ELOQUANT RELATIONS *
@@ -21,6 +30,11 @@ class Category extends Node implements TranslatableContract {
 	public function news()
 	{
 		return $this->hasMany('App\Models\News');
+	}
+
+	public function posts()
+	{
+		return $this->hasMany('App\Models\Post');
 	}
 
 

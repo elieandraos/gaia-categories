@@ -22,4 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
    Route::get('/categories/{category}/translate/{locale}', ['as' => 'admin.categories.translate', 'uses' => 'Gaia\Categories\CategoryController@translate']);
    Route::post('/categories/{category}/translate/{locale}/store', ['as' => 'admin.categories.translate-store', 'uses' => 'Gaia\Categories\CategoryController@translateStore']);
    Route::post('/categories/sort', [ 'as' => 'admin.categories.sort' ,'uses' => 'Gaia\Categories\CategoryController@sort']);
+   Route::get('/categories/roots-post-types', ['as' => 'admin.categories.roots' ,'uses' => 'Gaia\Categories\CategoryController@roots']);
+   Route::post('/categories/roots-post-types-store', [ 'as' => 'admin.categories.roots-store' ,'uses' => 'Gaia\Categories\CategoryController@storeRoots']);
+
 });
