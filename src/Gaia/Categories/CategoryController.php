@@ -179,15 +179,18 @@ class CategoryController extends Controller {
 			$obj->save();
 		}
 		//save the post post types root categories
-		foreach($input['post_type_id'] as $key => $val)
+		if(isset($input['post_type_id']))
 		{
-			$post_type_id = (int)$val;
-			$category_id = (int)$input['category_id'][$key];
-			if($category_id)
+			foreach($input['post_type_id'] as $key => $val)
 			{
-				$obj = CategoryModules::firstOrNew(['post_type_id' => $post_type_id]);
-				$obj->category_id = $category_id;
-				$obj->save();
+				$post_type_id = (int)$val;
+				$category_id = (int)$input['category_id'][$key];
+				if($category_id)
+				{
+					$obj = CategoryModules::firstOrNew(['post_type_id' => $post_type_id]);
+					$obj->category_id = $category_id;
+					$obj->save();
+				}
 			}
 		}
 
