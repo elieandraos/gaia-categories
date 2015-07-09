@@ -77,6 +77,7 @@ class CategoryController extends Controller {
 	public function store()
 	{
 		$input = Input::all();
+		$input['slug'] = str_slug($input['title']);
 		Category::create($input);
 		return Redirect::route('admin.categories.list');
 	}

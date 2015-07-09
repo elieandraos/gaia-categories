@@ -10,8 +10,8 @@ class Category extends Node implements TranslatableContract {
 	use Translatable;
 
 	protected $table = 'categories';
-	protected $fillable = ['title'];
-	protected $translatedAttributes = ['title'];
+	protected $fillable = ['title', 'slug', 'description'];
+	protected $translatedAttributes = ['title', 'description'];
 	protected $translator = 'App\Models\CategoryTranslation';
 
 	/************************************

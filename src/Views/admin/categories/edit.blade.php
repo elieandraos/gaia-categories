@@ -24,6 +24,7 @@
 			</div>
 			<div class="panel-body">
 				{!! Form::model($category, ['route' => ['admin.categories.update', $category->id]]) !!}
+					<p>Category Slug: <strong>{!! $category->slug !!}</strong></p><br/>
 					@include('admin.categories._form')
 				{!! Form::close() !!}
 			</div>
