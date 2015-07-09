@@ -103,6 +103,7 @@ class CategoryController extends Controller {
 	public function update(Category $category)
 	{
 		$input = Input::all();
+		$input['slug'] = str_slug($input['title']);
 		$category->update($input);
 		Flash::success('Category was updated successfully.');
 		return Redirect::route('admin.categories.list');
